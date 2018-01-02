@@ -9,14 +9,23 @@
     "serve": "serve dist -p 3000"
   },
   "dependencies": {
-    "axios": "^0.16.2",
-    "react": "^16.0.0",
+    "axios": "^0.17.1",
+    "emotion": "^8.0.12",
+    "emotion-server": "^8.0.12",
+    "polished": "^1.9.0",
+    "react": "^16.2.0",
     "react-dom": "^16.0.0",
+    "react-emotion": "^8.0.12",
     "react-router": "^4.2.0",
-    "react-static": "^4.8.3"
+    "react-static": "^4.8.3",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.1.2",
+    "babel-plugin-emotion": "^8.0.12",
     "eslint": "^4.14.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-tools": "1.x.x",
