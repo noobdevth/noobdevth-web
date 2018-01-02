@@ -48,7 +48,6 @@ async function invite(req, res) {
     })
 
     res.status(200).send({
-      status: 200,
       state: data.state,
       id: data.user.id,
       avatar: data.user.avatar_url
