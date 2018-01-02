@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {extractCritical} from 'emotion-server'
 
+const siteRoot = 'https://noobdevth.firebaseapp.com'
+
 class Document extends Component {
   render() {
     const {Html, Head, Body, children, renderMeta} = this.props
@@ -19,8 +21,10 @@ class Document extends Component {
 }
 
 export default {
+  siteRoot,
   getSiteProps: () => ({
-    title: 'just Do It'
+    title: 'just Do It',
+    siteRoot
   }),
   getRoutes: async () => [
     {

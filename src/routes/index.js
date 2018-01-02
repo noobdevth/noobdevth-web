@@ -5,6 +5,8 @@ import axios from 'axios'
 
 import bgImage from '../assets/bg.jpg'
 
+const siteRoot = 'https://noobdevth.firebaseapp.com'
+
 const Backdrop = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,7 +109,7 @@ const Paragraph = styled.p`
 `
 
 const Anchor = styled.a`
-  color: ${props => (props.white ? 'white' : 'teal')};
+  color: ${props => (props.white ? '#d1bef0' : 'teal')};
   text-decoration: none;
   font-size: 1.18m;
 `
@@ -162,8 +164,6 @@ const Success = ({result: {state, avatar}}) => {
       </Card>
     )
   }
-
-  return 'Indeterminate State'
 }
 
 const endpoint = 'https://us-central1-noobdevth.cloudfunctions.net/invite'
@@ -210,6 +210,12 @@ class Landing extends Component {
     return (
       <Backdrop>
         <Head>
+          <title>Join NoobProgrammer on GitHub</title>
+          <meta
+            name="description"
+            content="Invite Yourself to the NoobProgrammer Thailand Organization on GitHub."
+          />
+          <meta property="og:image" content={siteRoot + bgImage} />
           <link
             href="https://fonts.googleapis.com/css?family=Fira+Mono"
             rel="stylesheet"
