@@ -5,8 +5,9 @@
     "serve": "firebase serve --only functions",
     "shell": "firebase experimental:functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "deploy": "npm run prepare && firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "prepare": "babel ./*.mjs --retain-lines -d ./"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -20,8 +21,5 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1"
-  },
-  "scripts": {
-    "prepare": "babel ./*.mjs --retain-lines -d ./"
   }
 }

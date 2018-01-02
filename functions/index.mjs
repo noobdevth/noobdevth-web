@@ -2,22 +2,33 @@ const functions = require('firebase-functions')
 const GitHub = require('github')
 
 const config = functions.config()
-
 const ORG_ID = 'noobdevth'
+
+const err = error => ({error})
 
 async function invite(req, res) {
   try {
-    const {username} = req.query
+    const {username} = req.body
     const token = config.github.token
 
+    res.header('Content-Type', 'application/json')
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+
+    if (req.method === 'OPTIONS') {
+      return res.status(204).send('')
+    }
+
+    if (req.method !== 'POST') {
+      return res.status(405).send(err('Only the POST method is allowed.'))
+    }
+
     if (!username) {
-      res.send(JSON.stringify({status: 400, error: 'Username is required.'}))
-      return
+      return res.status(405).send(err('Username is Required.'))
     }
 
     if (!token) {
-      res.send(JSON.stringify({status: 500, error: 'Token is not set.'}))
-      return
+      return res.status(500).send(err('Token is not available.'))
     }
 
     const github = new GitHub({
@@ -36,22 +47,15 @@ async function invite(req, res) {
       role: 'member'
     })
 
-    const result = JSON.stringify({
+    res.status(200).send({
       status: 200,
-      url: data.url,
       state: data.state,
-      role: data.role,
-      user: data.user.id
+      id: data.user.id,
+      avatar: data.user.avatar_url
     })
-
-    res.send(result)
-  } catch (err) {
-    res.send(JSON.stringify({status: 500, error: err}))
+  } catch (error) {
+    res.status(500).send(err(error))
   }
 }
 
 exports.invite = functions.https.onRequest(invite)
-
-exports.helloWorld = functions.https.onRequest((req, res) => {
-  res.send('Hello from Firebase!')
-})
