@@ -48,12 +48,15 @@
 
 
       res.status(200).send({
-        status: 200,
         state: data.state,
         id: data.user.id,
         avatar: data.user.avatar_url });
 
     } catch (error) {
+      if (error.code === 404) {
+        return res.status(404).send(err('User Not Found.'));
+      }
+
       res.status(500).send(err(error));
     }
   });return function invite(_x, _x2) {return _ref.apply(this, arguments);};})();function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const functions = require('firebase-functions');const GitHub = require('github');const config = functions.config();const ORG_ID = 'noobdevth';const err = error => ({ error });

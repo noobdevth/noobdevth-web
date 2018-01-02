@@ -53,6 +53,10 @@ async function invite(req, res) {
       avatar: data.user.avatar_url
     })
   } catch (error) {
+    if (error.code === 404) {
+      return res.status(404).send(err('User Not Found.'))
+    }
+
     res.status(500).send(err(error))
   }
 }
